@@ -124,6 +124,10 @@ Single-feature apps go on the home page (`/`) — don't create sub-routes like `
 | `dev-logs` | Debug runtime errors, check server output |
 | `download-to-repo` | Download images/assets to project |
 | `write-client-env` | Write client-side env vars to `.env` |
+| `create-plan` | Create a development plan from user requirements |
+| `update-plan` | Modify an existing plan (title, content, tasks) |
+| `update-task` | Mark a task in-progress/completed/failed with proof |
+| `get-plan` | Read a plan and its current task statuses |
 
 ---
 
@@ -150,6 +154,29 @@ Users should always see what went wrong — never silent failures.
 ## Debugging
 
 **Debug order:** `dev-run` → `dev-logs` → check frontend console
+
+## Plan Execution
+
+When executing a plan:
+1. Call `get_plan` to read the full plan and task list
+2. Work through tasks in order (by sortOrder)
+3. Before starting a task, call `update_task` with status "in_progress"
+4. After completing a task, call `update_task` with status "completed" and attach proof:
+   - Take a browser screenshot if the task has visible UI changes
+   - Include test output if tests were run
+   - Include relevant log output (build success, lint pass, etc.)
+5. If a task fails, call `update_task` with status "failed" and include error output
+6. After all tasks are done, report completion
+
+## Plan Generation
+
+When the user describes what they want to build:
+1. Ask 1-2 clarifying questions if the scope is ambiguous
+2. Call `create_plan` with a structured plan:
+   - Clear title (2-6 words)
+   - Markdown content explaining the approach
+   - 3-8 concrete, implementable tasks
+3. If the user wants changes, call `update_plan` to modify
 
 ## Rules
 
