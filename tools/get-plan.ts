@@ -8,7 +8,7 @@ export default tool({
   },
   async execute({ planId }): Promise<string> {
     const res = await fetch(`${process.env.LAST_API_URL}/api/plans/${planId}`, {
-      headers: { 'Authorization': `Bearer ${process.env.LAST_API_KEY}` },
+      headers: { 'x-api-key': process.env.LAST_API_KEY! },
     })
     if (!res.ok) return `Failed to read plan: ${res.status}`
     const plan = await res.json()

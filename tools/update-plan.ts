@@ -22,7 +22,7 @@ export default tool({
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.LAST_API_KEY}`,
+        'x-api-key': process.env.LAST_API_KEY!,
       },
       body: JSON.stringify(body),
     })

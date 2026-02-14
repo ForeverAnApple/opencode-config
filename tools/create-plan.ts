@@ -16,7 +16,7 @@ export default tool({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.LAST_API_KEY}`,
+        'x-api-key': process.env.LAST_API_KEY!,
       },
       body: JSON.stringify({
         projectId: process.env.LAST_PROJECT_ID,
