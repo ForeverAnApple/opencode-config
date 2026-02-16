@@ -158,15 +158,24 @@ Users should always see what went wrong — never silent failures.
 ## Plan Execution
 
 When executing a plan:
-1. Call `get_plan` to read the full plan and task list
+1. Call `get-plan` to read the full plan and task list
 2. Work through tasks in order (by sortOrder)
-3. Before starting a task, call `update_task` with status "in_progress"
-4. After completing a task, call `update_task` with status "completed" and attach proof:
-   - Take a browser screenshot if the task has visible UI changes
+3. Before starting a task, call `update-task` with status "in_progress"
+4. After completing a task, call `update-task` with status "completed" and attach proof:
    - Include test output if tests were run
    - Include relevant log output (build success, lint pass, etc.)
-5. If a task fails, call `update_task` with status "failed" and include error output
+5. If a task fails, call `update-task` with status "failed" and include error output
 6. After all tasks are done, report completion
+
+### Autonomous Execution
+
+When the prompt specifies a working directory and says "do not ask questions", you are in autonomous execution mode. Follow these rules strictly:
+
+- **Never ask questions or wait for user input.** If something is ambiguous, make a reasonable decision and proceed. If truly blocked (missing credentials, unresolvable error), mark the current task as "failed" with a clear error and move to the next task.
+- **Use the specified working directory** for all file reads, writes, and bash commands. Pass absolute paths to subagents.
+- **Never run git commit, git push, git checkout, or git rebase.** The system handles git operations after execution completes.
+- **Do not use `dev-run` or `dev-logs`.** There is no dev server in the execution worktree. Verify your work through lint, type checking, and test commands instead.
+- **Continue through all tasks** even if one fails — mark it failed and proceed to the next.
 
 ## Plan Generation
 

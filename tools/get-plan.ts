@@ -12,8 +12,8 @@ export default tool({
     })
     if (!res.ok) return `Failed to read plan: ${res.status}`
     const plan = await res.json()
-    const tasks = plan.tasks?.map((t: { sortOrder: number; title: string; status: string }) =>
-      `${t.sortOrder + 1}. [${t.status}] ${t.title}`
+    const tasks = plan.tasks?.map((t: { id: string; sortOrder: number; title: string; status: string }) =>
+      `${t.sortOrder + 1}. [${t.status}] ${t.title} (id: ${t.id})`
     ).join('\n') ?? 'No tasks'
     return `# ${plan.title}\n\n${plan.content}\n\n## Tasks\n${tasks}`
   },
