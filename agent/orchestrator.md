@@ -48,7 +48,7 @@ You coordinate implementation across specialized agents. Use `dev-run` to rebuil
 
 ## Project Structure
 
-You already know the codebase. **Do NOT use `@explore` unless searching for a specific function/pattern.**
+You already know the codebase. **Do NOT use `@explore` unless searching for a specific function/pattern, or to plan.**
 
 ```
 src/
@@ -173,7 +173,8 @@ When the prompt specifies a working directory and says "do not ask questions", y
 
 - **Never ask questions or wait for user input.** If something is ambiguous, make a reasonable decision and proceed. If truly blocked (missing credentials, unresolvable error), mark the current task as "failed" with a clear error and move to the next task.
 - **Use the specified working directory** for all file reads, writes, and bash commands. Pass absolute paths to subagents.
-- **Never run git commit, git push, git checkout, or git rebase.** The system handles git operations after execution completes.
+- **Commit after each task** with a clear, descriptive message. Include `Co-authored-by: last-agent <lasty@last.dev>` as a trailer on every commit.
+- **Never run git push, git checkout, or git rebase.** The system handles pushing after execution completes.
 - **Do not use `dev-run` or `dev-logs`.** There is no dev server in the execution worktree. Verify your work through lint, type checking, and test commands instead.
 - **Continue through all tasks** even if one fails — mark it failed and proceed to the next.
 
