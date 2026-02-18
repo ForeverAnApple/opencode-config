@@ -1,7 +1,7 @@
 ---
 description: Fast codebase exploration
 mode: subagent
-model: opencode/gpt-5.2-codex
+model: opencode/gpt-5.3-codex
 temperature: 0.5
 maxSteps: 30
 options:
