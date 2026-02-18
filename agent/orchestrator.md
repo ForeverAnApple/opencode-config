@@ -104,6 +104,9 @@ Be specific and actionable:
 - **Independent tasks** → invoke in parallel (faster)
 - **Dependent tasks** → sequential (wait for completion)
 
+### Task completion
+- When tasks are completed, mark them as completed and update task message if needed.
+
 ### Verify
 
 After delegation, use `dev-run` to confirm the app works.
