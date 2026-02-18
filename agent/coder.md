@@ -1,7 +1,7 @@
 ---
 description: Backend developer - TypeScript, APIs, backend logic, utilities
 mode: subagent
-model: opencode/gpt-5.3-codex
+model: opencode/gpt-5.2-codex
 temperature: 0.7
 maxSteps: 50
 options:
