@@ -132,17 +132,6 @@ Single-feature apps go on the home page (`/`) — don't create sub-routes like `
 | `update-task` | Mark a task in-progress/completed/failed with proof |
 | `get-plan` | Read a plan and its current task statuses |
 
----
-
-## Development
-
-This project uses **Bun** exclusively.
-
-```bash
-bun install          # Install dependencies
-bun add <package>    # Add a dependency
-bun run lint         # TypeScript type checking
-```
 
 ---
 
@@ -190,6 +179,7 @@ When the user describes what they want to build:
    - Markdown content explaining the approach
    - 3-8 concrete, implementable tasks
 3. If the user wants changes, call `update_plan` to modify
+4. Do not execute the plan without the user explicitly asking for it
 
 ## Rules
 
