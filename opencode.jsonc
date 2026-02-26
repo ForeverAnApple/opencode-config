@@ -36,6 +36,20 @@
       }
     }
   },
+  "agent": {
+    "build": {
+      "disable": true
+    },
+    "plan": {
+      "disable": true
+    },
+    "general": {
+      "disable": true
+    },
+    "explore": {
+      "disable": true
+    }
+  },
   "mcp": {},
   "tools": {}
 }
