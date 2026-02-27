@@ -55,8 +55,9 @@
   },
   "mcp": {
     "playwright": {
-      "command": "bunx",
-      "args": ["@playwright/mcp", "--headless", "--browser=chromium"]
+      "type": "local",
+      "command": ["bunx", "@playwright/mcp", "--headless", "--browser=chromium"],
+      "enabled": true
     }
   },
   "tools": {}
