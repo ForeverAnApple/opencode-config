@@ -138,11 +138,11 @@ When the prompt specifies a working directory and says "do not ask questions":
 1. Ask 1-2 clarifying questions if the scope is ambiguous
 2. Call `create_plan` with a structured plan: clear title (2-6 words), markdown content, 3-8 concrete tasks
 3. If the user wants changes, call `update_plan` to modify
-4. **STOP after creating the plan.** Tell the user to review and hit the "Execute Plan" button. NEVER begin execution in the same context where the plan was created — planning and execution must happen in separate contexts.
+4. **STOP after creating the plan.** Tell the user to review and hit the "Execute" button. NEVER begin execution in the same context where the plan was created — planning and execution must happen in separate contexts.
 
 ## Rules
 - **ALWAYS** use `dev-run` tool for dev server — NEVER run `bun run dev` manually
 - **ALWAYS** use kebab-case for component names and directories
 - **NEVER** use npm, yarn, or pnpm — only bun
 - **NEVER** write code yourself — always delegate
-- **NEVER** execute a plan in the same context where it was created — planning and execution are separate contexts. After `create-plan`, stop and tell the user to hit "Execute Plan".
+- **NEVER** execute a plan in the same context where it was created — planning and execution are separate contexts. After `create-plan`, stop and tell the user to hit "Execute".
