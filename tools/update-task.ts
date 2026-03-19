@@ -21,14 +21,31 @@ export default tool({
     const resolved: Record<string, unknown>[] = []
     for (const p of proof ?? []) {
       if (p.filePath && !p.data) {
-        const file = Bun.file(p.filePath)
-        if (await file.exists()) {
-          const buf = await file.arrayBuffer()
-          const base64 = Buffer.from(buf).toString('base64')
-          const mime = p.filePath.endsWith('.jpeg') || p.filePath.endsWith('.jpg') ? 'image/jpeg' : 'image/png'
-          resolved.push({ ...p, data: `data:${mime};base64,${base64}`, filePath: undefined })
-        } else {
-          resolved.push({ ...p, output: `Screenshot file not found: ${p.filePath}`, filePath: undefined })
+        // Try exact path first, then common screenshot directories
+        const basename = p.filePath.split('/').pop() || '';
+        const dir = p.filePath.substring(0, p.filePath.lastIndexOf('/'));
+        const candidates = [
+          p.filePath,
+          ...(basename ? [
+            `${process.cwd()}/.last/screenshots/${basename}`,
+            ...(dir ? [`${dir}/.last/screenshots/${basename}`] : []),
+          ] : []),
+        ];
+
+        let matched = false;
+        for (const candidate of candidates) {
+          const file = Bun.file(candidate);
+          if (await file.exists()) {
+            const buf = await file.arrayBuffer();
+            const base64 = Buffer.from(buf).toString('base64');
+            const mime = candidate.endsWith('.jpeg') || candidate.endsWith('.jpg') ? 'image/jpeg' : 'image/png';
+            resolved.push({ ...p, data: `data:${mime};base64,${base64}`, filePath: undefined });
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) {
+          resolved.push({ ...p, output: "Screenshot unavailable", filePath: undefined });
         }
       } else {
         resolved.push(p)

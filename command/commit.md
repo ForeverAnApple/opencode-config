@@ -1,10 +1,10 @@
 ---
-description: git commit and push
+description: git commit (do NOT push)
 model: opencode/glm-4.6
 subtask: true
 ---
 
-commit and push
+Commit staged changes. **Do NOT run git push** — the system handles pushing automatically after execution completes.
 
 make sure it includes a prefix like
 docs:
