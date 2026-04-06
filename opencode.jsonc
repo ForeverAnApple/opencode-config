@@ -1,9 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  // "plugin": ["opencode-openai-codex-auth"],
-  // "enterprise": {
-  //   "url": "https://enterprise.dev.opencode.ai",
-  // },
   "instructions": ["STYLE_GUIDE.md"],
   "provider": {
     "opencode": {
@@ -53,12 +49,6 @@
       "disable": true
     }
   },
-  "mcp": {
-    "playwright": {
-      "type": "local",
-      "command": ["bunx", "@playwright/mcp@0.0.68", "--headless", "--browser=chromium"],
-      "enabled": true
-    }
-  },
+  "mcp": {},
   "tools": {}
 }
