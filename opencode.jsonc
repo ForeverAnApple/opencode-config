@@ -49,6 +49,12 @@
       "disable": true
     }
   },
-  "mcp": {},
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": ["bunx", "@playwright/mcp@0.0.68", "--headless", "--browser=chromium"],
+      "enabled": true
+    }
+  },
   "tools": {}
 }
