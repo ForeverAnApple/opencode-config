@@ -5,6 +5,7 @@ interface LastConfig {
   name: string
   scripts: {
     dev: string | string[]
+    build?: string
     lint?: string
   }
 }
@@ -44,6 +45,18 @@ export default tool({
         return output.join('\n')
       }
       output.push('✓ Lint passed')
+    }
+
+    // Run build
+    if (cfg.scripts.build) {
+      const result = await $`${{ raw: cfg.scripts.build }}`.nothrow().quiet()
+      if (result.exitCode !== 0) {
+        output.push('BUILD FAILED:')
+        output.push(result.stdout.toString())
+        output.push(result.stderr.toString())
+        return output.join('\n')
+      }
+      output.push('✓ Build passed')
     }
 
     // Start dev server(s) via PM2
