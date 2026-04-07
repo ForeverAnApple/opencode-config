@@ -4,6 +4,7 @@ export default tool({
   description:
     'Update the project context displayed in the dashboard. Use this to populate research findings, industry tags, problem statements, etc. Fields are merge-updated (only provided fields are changed).',
   args: {
+    description: tool.schema.string().optional().describe('Short project description shown on the catalog card (1-2 sentences)'),
     industry: tool.schema.string().optional().describe('Industry vertical (e.g. "Healthcare", "Fintech", "E-commerce")'),
     tags: tool.schema.array(tool.schema.string()).optional().describe('Research/topic tags (e.g. ["AI", "B2B", "SaaS"])'),
     problemStatement: tool.schema.string().optional().describe('The core problem this demo addresses'),
@@ -30,6 +31,27 @@ export default tool({
 
     if (Object.keys(patch).length === 0) return 'No fields provided'
 
+    const output: string[] = []
+
+    // Update project-level fields via PUT /api/projects/:id
+    const projectUpdate: Record<string, unknown> = {}
+    if (patch.tags) projectUpdate.tags = patch.tags
+    if (patch.description) projectUpdate.description = patch.description
+    if (Object.keys(projectUpdate).length > 0) {
+      const putRes = await fetch(`${baseUrl}/api/projects/${projectId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+        },
+        body: JSON.stringify(projectUpdate),
+      })
+      if (putRes.ok) {
+        output.push(`✓ Updated project: ${Object.keys(projectUpdate).join(', ')}`)
+      }
+    }
+
+    // Update metadata via PATCH /api/projects/:id/metadata
     const res = await fetch(`${baseUrl}/api/projects/${projectId}/metadata`, {
       method: 'PATCH',
       headers: {
@@ -44,6 +66,8 @@ export default tool({
     }
 
     const updated = await res.json()
-    return `✓ Updated project context: ${Object.keys(patch).join(', ')}\n${JSON.stringify(updated, null, 2)}`
+    output.push(`✓ Updated project context: ${Object.keys(patch).join(', ')}`)
+    output.push(JSON.stringify(updated, null, 2))
+    return output.join('\n')
   },
 })

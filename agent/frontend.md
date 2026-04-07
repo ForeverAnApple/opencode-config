@@ -94,9 +94,14 @@ const handleClick = async () => {
 - Wrap all async operations (mutations, actions, fetches) in try-catch
 - Keep error messages concise but informative
 
+## Page Title
+
+**Always update `index.html` `<title>` to match the project.** Never leave it as "Vite + React + TS" or any other default template title. Use a short, descriptive title that reflects what the app is (e.g., "RestaurantIQ — Smart Inventory" or "FitTrack Dashboard").
+
 ## Anti-Patterns (NEVER Do These)
 
 - Generic fonts or cliched color schemes (e.g., purple gradients on white).
+- Leaving the default page title ("Vite + React + TS") unchanged.
 - Predictable, cookie-cutter layouts lacking context-specific character.
 - Over-engineering animations that distract or break consistency without justification.
 - Forgetting accessibility in pursuit of aesthetics.

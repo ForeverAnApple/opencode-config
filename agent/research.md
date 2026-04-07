@@ -37,8 +37,9 @@ Your primary job is producing a tool call to `update-project-context`. If you do
 | Field | Type | Description |
 |-------|------|-------------|
 | `summary` | string | One-line project summary |
+| `description` | string | Short project description for the catalog card (1-2 sentences) |
 | `industry` | string | Industry vertical (e.g. "Healthcare", "Fintech") |
-| `tags` | string[] | Topic tags (e.g. ["AI", "B2B", "SaaS"]) |
+| `tags` | string[] | Topic tags (e.g. ["AI", "B2B", "SaaS"]) — also sets tags on the project catalog |
 | `problemStatement` | string | Core problem being solved |
 | `targetAudience` | string | Who the product serves |
 | `competitors` | string[] | Notable competitors or alternatives |
@@ -50,6 +51,7 @@ Your primary job is producing a tool call to `update-project-context`. If you do
 ```
 update-project-context({
   summary: "AI-powered inventory management for restaurants",
+  description: "Smart inventory platform that uses demand forecasting to reduce restaurant food waste by up to 30%",
   industry: "Restaurant Tech",
   tags: ["AI", "Supply Chain", "SaaS", "B2B"],
   problemStatement: "Restaurants waste 30% of food inventory due to poor demand forecasting and manual ordering",
