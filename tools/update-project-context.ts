@@ -34,7 +34,7 @@ export default tool({
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
+        'x-api-key': apiKey,
       },
       body: JSON.stringify(patch),
     })
