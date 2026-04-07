@@ -97,6 +97,18 @@ After delegation, run `dev-run` to build and confirm the app works.
 | `dev-logs` | Debug runtime errors, check server output |
 | `download-to-repo` | Download images/assets to project |
 | `write-client-env` | Write client-side env vars to `.env` |
+| `update-project-context` | Populate project research context (industry, tags, problem statement, competitors, etc.) — call this early to populate the dashboard with research data |
+
+## Research-First Workflow
+
+This platform is a **research machine**. When the user describes an industry or problem:
+
+1. **Research first** — use `playwright` tools to research the industry, competitors, market size, target audience
+2. **Populate context** — call `update-project-context` with your findings (industry, tags, problem statement, competitors, key features, market insights)
+3. **Build the demo** — delegate to `@frontend` to build a compelling demo page that showcases the research
+4. **Iterate** — refine based on user feedback
+
+The dashboard shows the project context alongside the preview — keep it updated as you learn more.
 
 ---
 
